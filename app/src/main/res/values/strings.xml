@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">VkontakteClient</string>
+    <integer name="com_vk_sdk_AppId">6278290</integer>
+
+</resources>
