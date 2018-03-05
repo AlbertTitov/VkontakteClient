@@ -1,4 +1,4 @@
-package newfarmstudio.vkontakteclient;
+package newfarmstudio.vkontakteclient.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +16,14 @@ import com.vk.sdk.util.VKUtil;
 
 import java.util.Arrays;
 
+import newfarmstudio.vkontakteclient.CurrentUser;
+import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.consts.ApiConstants;
 import newfarmstudio.vkontakteclient.mvp.presenter.MainPresenter;
 import newfarmstudio.vkontakteclient.mvp.view.MainView;
+import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView{
+public class MainActivity extends BaseActivity implements MainView{
 
     @InjectPresenter
     MainPresenter mainPresenter;
