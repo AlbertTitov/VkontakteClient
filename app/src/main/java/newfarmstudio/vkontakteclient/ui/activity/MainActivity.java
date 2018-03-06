@@ -2,26 +2,22 @@ package newfarmstudio.vkontakteclient.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
-import com.vk.sdk.util.VKUtil;
-
-import java.util.Arrays;
 
 import newfarmstudio.vkontakteclient.CurrentUser;
+import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.consts.ApiConstants;
 import newfarmstudio.vkontakteclient.mvp.presenter.MainPresenter;
 import newfarmstudio.vkontakteclient.mvp.view.MainView;
-import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
+import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
 
 public class MainActivity extends BaseActivity implements MainView{
 
@@ -31,9 +27,14 @@ public class MainActivity extends BaseActivity implements MainView{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        MyApplication.getsApplicationComponent().inject(this);
 
         mainPresenter.checkAuth();
+    }
+
+    @Override
+    protected int getMainContentLayout() {
+        return R.layout.activity_main;
     }
 
 
@@ -63,5 +64,6 @@ public class MainActivity extends BaseActivity implements MainView{
     @Override
     public void signedId() {
         Toast.makeText(this, "Current user id: " + CurrentUser.getId(), Toast.LENGTH_LONG).show();
+        setContent(new NewsFeedFragment());
     }
 }

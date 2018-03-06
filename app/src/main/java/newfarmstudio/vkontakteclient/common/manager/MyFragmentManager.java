@@ -40,7 +40,7 @@ public class MyFragmentManager {
         return removeFragment(activity, mCurrentFragment);
     }
 
-    private boolean removeFragment(BaseActivity activity, BaseFragment fragment) {
+    public boolean removeFragment(BaseActivity activity, BaseFragment fragment) {
         boolean canRemove = fragment != null && mFragmentStack.size() > EMPTY_FRAGMENT_STACK_SIZE;
 
         if (canRemove) {
@@ -70,6 +70,8 @@ public class MyFragmentManager {
             }
 
             mFragmentStack.add(fragment);
+            commitTransaction(activity, fragmentTransaction);
+
         }
     }
 
@@ -83,5 +85,9 @@ public class MyFragmentManager {
             return false;
         }
         return mCurrentFragment != null && mCurrentFragment.getClass().getName().equals(fragment.getClass().getName());
+    }
+
+    public Stack<BaseFragment> getFragmentStack() {
+        return mFragmentStack;
     }
 }
