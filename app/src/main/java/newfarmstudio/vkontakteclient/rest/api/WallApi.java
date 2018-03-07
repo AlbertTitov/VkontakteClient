@@ -1,10 +1,10 @@
 package newfarmstudio.vkontakteclient.rest.api;
 
-import newfarmstudio.vkontakteclient.rest.model.response.BaseItemResponse;
-import newfarmstudio.vkontakteclient.rest.model.response.Full;
+import java.util.Map;
+import newfarmstudio.vkontakteclient.rest.model.response.WallGetResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by Альберт on 06.03.2018.
@@ -13,8 +13,5 @@ import retrofit2.http.Query;
 public interface WallApi {
 
     @GET(ApiMethods.WALL_GET)
-    Call<Full<BaseItemResponse>> get(@Query("owner_id") String ownerId,
-                                     @Query("access_token") String accessToken,
-                                     @Query("extended") Integer extended,
-                                     @Query("v") String version);
+    Call<WallGetResponse> get(@QueryMap Map<String, String> map);
 }

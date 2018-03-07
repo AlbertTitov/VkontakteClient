@@ -2,6 +2,7 @@ package newfarmstudio.vkontakteclient.di.module;
 
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 
 import javax.inject.Singleton;
@@ -32,5 +33,11 @@ public class ApplicationModule {
     @Provides
     LayoutInflater provideLayoutInflater() {
         return (LayoutInflater) mApplication.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Singleton
+    @Provides
+    Typeface provideGoogleTypeface(Context context) {
+        return Typeface.createFromAsset(context.getAssets(), "MaterialIcons-Regular.ttf");
     }
 }
