@@ -17,7 +17,7 @@ import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
 
 public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewModel>> {
 
-    private List<BaseViewModel>  list = new ArrayList<>();
+    private List<BaseViewModel> list = new ArrayList<>();
     private ArrayMap<Integer, BaseViewModel> mTypeInstances = new ArrayMap<>();
 
     @Override
@@ -64,14 +64,22 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         notifyDataSetChanged();
     }
 
-    public void setItems (List<BaseViewModel> items) {
+    public void setItems(List<BaseViewModel> items) {
         clearList();
         addItems(items);
-
-
     }
 
     public void clearList() {
         list.clear();
+    }
+
+    public int getRealItemCount() {
+        int count = 0;
+        for (int i = 0; i < getItemCount(); i++) {
+            if (!getItem(i).isItemDecorator()) {
+                count += 1;
+            }
+        }
+        return count;
     }
 }

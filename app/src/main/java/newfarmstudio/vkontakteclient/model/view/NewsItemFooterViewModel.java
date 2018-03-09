@@ -89,4 +89,9 @@ public class NewsItemFooterViewModel extends BaseViewModel {
     public void setDateLong(long mDateLong) {
         this.mDateLong = mDateLong;
     }
+
+    @Override
+    public boolean isItemDecorator() {
+        return true;
+    }
 }

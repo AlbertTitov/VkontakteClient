@@ -3,11 +3,13 @@ package newfarmstudio.vkontakteclient.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Альберт on 07.03.2018.
  */
 
-public class Profile implements Owner {
+public class Profile extends RealmObject implements Owner {
 
     @SerializedName("id")
     @Expose

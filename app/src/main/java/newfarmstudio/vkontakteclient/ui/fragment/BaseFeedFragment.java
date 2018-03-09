@@ -3,8 +3,8 @@ package newfarmstudio.vkontakteclient.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.BaseAdapter;
+import newfarmstudio.vkontakteclient.common.manager.MyLinearLayoutManager;
 import newfarmstudio.vkontakteclient.model.view.BaseViewModel;
 import newfarmstudio.vkontakteclient.mvp.presenter.BaseFeedPresenter;
 import newfarmstudio.vkontakteclient.mvp.view.BaseFeedView;
@@ -55,7 +56,19 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
 
     private void setUpRecyclerView(View rootView) {
         mRecyclerView = rootView.findViewById(R.id.rv_list);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity());
+
+        mRecyclerView.setLayoutManager(myLinearLayoutManager);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if (myLinearLayoutManager.isOnNextPagePosition()) {
+                    mBaseFeedPresenter.loadNext(mBaseAdapter.getRealItemCount());
+                }
+            }
+        });
+
+        ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
 
     private void setUpAdapter(RecyclerView recyclerView) {

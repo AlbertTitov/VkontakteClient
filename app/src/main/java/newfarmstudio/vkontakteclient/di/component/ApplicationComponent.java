@@ -3,6 +3,7 @@ package newfarmstudio.vkontakteclient.di.component;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import newfarmstudio.vkontakteclient.common.manager.NetworkManager;
 import newfarmstudio.vkontakteclient.di.module.ApplicationModule;
 import newfarmstudio.vkontakteclient.di.module.ManagerModule;
 import newfarmstudio.vkontakteclient.di.module.RestModule;
@@ -33,4 +34,7 @@ public interface ApplicationComponent {
 
     //presenters
     void inject(NewsFeedPresenter presenter);
+
+    //managers
+    void inject(NetworkManager networkManager);
 }

@@ -4,11 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.vk.sdk.api.model.VKAttachments;
 
+import io.realm.RealmObject;
 
 
-
-
-public class Video implements Attachment {
+public class Video extends RealmObject implements Attachment {
 
     @SerializedName("id")
     @Expose

@@ -10,14 +10,14 @@ import newfarmstudio.vkontakteclient.ui.holder.NewsItemBodyHolder;
  * Created by Альберт on 07.03.2018.
  */
 
-public class NewsFeedItemBodyViewModel extends BaseViewModel {
+public class NewsItemBodyViewModel extends BaseViewModel {
 
     private int mId;
     private String mText;
     private String mAttachmentString;
     private boolean mIsRepost;
 
-    public NewsFeedItemBodyViewModel(WallItem wallItem) {
+    public NewsItemBodyViewModel(WallItem wallItem) {
         this.mId = wallItem.getId();
         this.mIsRepost = wallItem.haveSharedRepost();
 
@@ -51,5 +51,10 @@ public class NewsFeedItemBodyViewModel extends BaseViewModel {
 
     public String getmAttachmentString() {
         return mAttachmentString;
+    }
+
+    @Override
+    public boolean isItemDecorator() {
+        return true;
     }
 }

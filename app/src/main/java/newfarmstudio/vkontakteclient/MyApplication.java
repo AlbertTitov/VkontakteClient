@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.vk.sdk.VKSdk;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import newfarmstudio.vkontakteclient.di.component.ApplicationComponent;
 import newfarmstudio.vkontakteclient.di.component.DaggerApplicationComponent;
 import newfarmstudio.vkontakteclient.di.module.ApplicationModule;
@@ -23,7 +25,15 @@ public class MyApplication extends Application {
         super.onCreate();
 
         initComponent();
+
         VKSdk.initialize(this);
+
+        Realm.init(this);
+        RealmConfiguration realmConfiguration = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(realmConfiguration);
     }
 
     private void initComponent() {
