@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 
@@ -20,6 +21,8 @@ import newfarmstudio.vkontakteclient.ui.fragment.BaseFragment;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
+    protected ProgressBar mProgressBar;
+
     @Inject
     MyFragmentManager myFragmentManager;
 
@@ -30,6 +33,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
 
         MyApplication.getsApplicationComponent().inject(this);
 
+        mProgressBar = findViewById(R.id.progress);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -45,6 +49,10 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
+    }
+
+    public ProgressBar getProgressBar() {
+        return mProgressBar;
     }
 
     @LayoutRes

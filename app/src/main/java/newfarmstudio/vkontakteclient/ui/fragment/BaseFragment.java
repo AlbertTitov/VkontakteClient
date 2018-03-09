@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 
+import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
+
 /**
  * Created by Альберт on 05.03.2018.
  */
@@ -34,4 +36,8 @@ public abstract class BaseFragment extends MvpAppCompatFragment {
 
     @StringRes
     public abstract int onCreateToolbarTitle();
+
+    public BaseActivity getBaseActivity() {
+        return (BaseActivity) getActivity();
+    }
 }

@@ -6,6 +6,7 @@ import dagger.Component;
 import newfarmstudio.vkontakteclient.di.module.ApplicationModule;
 import newfarmstudio.vkontakteclient.di.module.ManagerModule;
 import newfarmstudio.vkontakteclient.di.module.RestModule;
+import newfarmstudio.vkontakteclient.mvp.presenter.NewsFeedPresenter;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.activity.MainActivity;
 import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
@@ -29,4 +30,7 @@ public interface ApplicationComponent {
     //holders
     void inject(NewsItemBodyHolder holder);
     void inject(NewsItemFooterHolder holder);
+
+    //presenters
+    void inject(NewsFeedPresenter presenter);
 }
