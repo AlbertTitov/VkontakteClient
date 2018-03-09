@@ -9,8 +9,8 @@ import java.util.List;
 
 public class BaseItemResponse<T> {
 
-    public Integer count;
-    public List<T> items = new ArrayList<>();
+    private Integer count;
+    private List<T> items = new ArrayList<>();
 
     public Integer getCount() {
         return count;

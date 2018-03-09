@@ -9,6 +9,8 @@ import newfarmstudio.vkontakteclient.di.module.RestModule;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.activity.MainActivity;
 import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
+import newfarmstudio.vkontakteclient.ui.holder.NewsItemBodyHolder;
+import newfarmstudio.vkontakteclient.ui.holder.NewsItemFooterHolder;
 
 /**
  * Created by Альберт on 06.03.2018.
@@ -23,4 +25,8 @@ public interface ApplicationComponent {
 
     //fragments
     void inject(NewsFeedFragment newsFeedFragment);
+
+    //holders
+    void inject(NewsItemBodyHolder holder);
+    void inject(NewsItemFooterHolder holder);
 }

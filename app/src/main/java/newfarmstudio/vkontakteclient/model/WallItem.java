@@ -1,39 +1,60 @@
 
 package newfarmstudio.vkontakteclient.model;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import newfarmstudio.vkontakteclient.model.attachment.ApiAttachment;
+
 public class WallItem {
+
+    private String attachmentsString;
+    private String senderName;
+    private String senderPhoto;
 
     @SerializedName("id")
     @Expose
     private Integer id;
+
     @SerializedName("from_id")
     @Expose
     private Integer fromId;
+
     @SerializedName("owner_id")
     @Expose
     private Integer ownerId;
+
     @SerializedName("date")
     @Expose
     private Integer date;
+
     @SerializedName("marked_as_ads")
     @Expose
     private Integer markedAsAds;
+
     @SerializedName("post_type")
     @Expose
     private String postType;
+
     @SerializedName("text")
     @Expose
     private String text;
+
     @SerializedName("can_pin")
     @Expose
     private Integer canPin;
+
     @SerializedName("attachments")
     @Expose
-    private List<Attachment> attachments = null;
+    private List<ApiAttachment> attachments = new ArrayList<>();
+
+    @SerializedName("copy_history")
+    @Expose
+    private List<WallItem> copyHistory = new ArrayList<>();
+
     @SerializedName("post_source")
     @Expose
     private PostSource postSource;
@@ -114,11 +135,11 @@ public class WallItem {
         this.canPin = canPin;
     }
 
-    public List<Attachment> getAttachments() {
+    public List<ApiAttachment> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<Attachment> attachments) {
+    public void setAttachments(List<ApiAttachment> attachments) {
         this.attachments = attachments;
     }
 
@@ -162,4 +183,40 @@ public class WallItem {
         this.views = views;
     }
 
+    public String getSenderName() {
+
+        return senderName;
+    }
+
+    public String getSenderPhoto() {
+        return senderPhoto;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
+    }
+
+    public void setSenderPhoto(String senderPhoto) {
+        this.senderPhoto = senderPhoto;
+    }
+
+    public String getAttachmentsString() {
+
+        return attachmentsString;
+    }
+
+    public void setAttachmentsString(String attachmentsString) {
+        this.attachmentsString = attachmentsString;
+    }
+
+    public boolean haveSharedRepost() {
+        return copyHistory.size() > 0;
+    }
+
+    public WallItem getSharedRepost() {
+        if (haveSharedRepost()) {
+            return copyHistory.get(0);
+        }
+        return null;
+    }
 }

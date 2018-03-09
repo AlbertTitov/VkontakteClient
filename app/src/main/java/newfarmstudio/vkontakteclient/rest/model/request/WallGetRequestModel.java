@@ -14,16 +14,16 @@ import newfarmstudio.vkontakteclient.consts.ApiConstants;
 public class WallGetRequestModel extends BaseRequestModel {
 
     @SerializedName(VKApiConst.OWNER_ID)
-    int ownerId;
+    private int ownerId;
 
     @SerializedName(VKApiConst.COUNT)
-    int count = ApiConstants.DEFAULT_COUNT;
+    private int count = ApiConstants.DEFAULT_COUNT;
 
     @SerializedName(VKApiConst.OFFSET)
-    int offset;
+    private int offset = 0;
 
     @SerializedName(VKApiConst.EXTENDED)
-    int extended;
+    private int extended = 1;
 
     public WallGetRequestModel(int ownerId) {
         this.ownerId = ownerId;

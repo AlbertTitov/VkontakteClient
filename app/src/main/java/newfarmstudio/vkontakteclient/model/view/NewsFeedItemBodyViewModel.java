@@ -14,10 +14,21 @@ public class NewsFeedItemBodyViewModel extends BaseViewModel {
 
     private int mId;
     private String mText;
+    private String mAttachmentString;
+    private boolean mIsRepost;
 
     public NewsFeedItemBodyViewModel(WallItem wallItem) {
         this.mId = wallItem.getId();
-        this.mText = wallItem.getText();
+        this.mIsRepost = wallItem.haveSharedRepost();
+
+        if (mIsRepost) {
+            this.mText = wallItem.getSharedRepost().getText();
+            this.mAttachmentString = wallItem.getSharedRepost().getAttachmentsString();
+
+        } else {
+            this.mText = wallItem.getText();
+            this.mAttachmentString = wallItem.getAttachmentsString();
+        }
     }
 
     @Override
@@ -36,5 +47,9 @@ public class NewsFeedItemBodyViewModel extends BaseViewModel {
 
     public String getText() {
         return mText;
+    }
+
+    public String getmAttachmentString() {
+        return mAttachmentString;
     }
 }
