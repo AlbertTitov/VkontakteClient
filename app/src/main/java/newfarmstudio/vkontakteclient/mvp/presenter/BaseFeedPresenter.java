@@ -44,9 +44,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
                     return aBoolean ?
                             onCreateLoadDataObservable(count, offset) :
                             onCreateRestoreDataObservable();
-                });
-
-        onCreateLoadDataObservable(count, offset)
+                })
                 .toList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -128,9 +126,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
 
     public void saveToDb(RealmObject item) {
         Realm realm = Realm.getDefaultInstance();
-        realm.executeTransaction(realm1 -> {
-            realm1.copyToRealmOrUpdate(item);
-        });
+        realm.executeTransaction(realm1 -> realm1.copyToRealmOrUpdate(item));
     }
 
     public abstract Observable<BaseViewModel> onCreateRestoreDataObservable();

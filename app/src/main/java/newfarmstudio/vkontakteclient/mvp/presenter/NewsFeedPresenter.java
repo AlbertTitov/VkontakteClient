@@ -34,16 +34,14 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
     WallApi mWallApi;
 
     public NewsFeedPresenter() {
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
     }
 
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
         return mWallApi.get(new WallGetRequestModel(-86529522, count, offset).toMap())
                 .flatMap(full -> Observable.fromIterable(VkListHelper.getWallList(full.response)))
-                .doOnNext(wallItem -> {
-                    saveToDb(wallItem);
-                })
+                .doOnNext(this::saveToDb)
                 .flatMap(wallItem -> {
                     List<BaseViewModel> baseItems = new ArrayList<>();
                     baseItems.add(new NewsItemHeaderViewModel(wallItem));
@@ -76,7 +74,6 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
         baseItems.add(new NewsItemHeaderViewModel(wallItem));
         baseItems.add(new NewsItemBodyViewModel(wallItem));
         baseItems.add(new NewsItemFooterViewModel(wallItem));
-
         return baseItems;
     }
 }

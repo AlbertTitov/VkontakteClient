@@ -37,7 +37,7 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
 
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
         mContext = itemView.getContext();
         mResources = mContext.getResources();
 

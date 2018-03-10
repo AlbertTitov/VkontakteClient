@@ -34,7 +34,7 @@ public class NewsFeedFragment extends BaseFeedFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
     }
 
     @Override

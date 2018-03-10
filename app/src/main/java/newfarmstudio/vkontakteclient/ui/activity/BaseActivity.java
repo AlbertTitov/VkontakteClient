@@ -31,7 +31,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
 
         mProgressBar = findViewById(R.id.progress);
         Toolbar toolbar = findViewById(R.id.toolbar);

@@ -26,13 +26,13 @@ public class NetworkManager {
     private static final String TAG = "NetworkManager";
 
     public NetworkManager() {
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
     }
 
     public boolean isOnline() {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        return (networkInfo != null && networkInfo.isConnected() || Util.isEmulator());
+        return ((networkInfo != null && networkInfo.isConnected()) || Util.isEmulator());
     }
 
     public Callable<Boolean> isVkReachableCallable() {

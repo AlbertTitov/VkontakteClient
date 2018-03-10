@@ -24,7 +24,7 @@ public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
 
     public NewsItemBodyHolder(View itemView) {
         super(itemView);
-        MyApplication.getsApplicationComponent().inject(this);
+        MyApplication.getApplicationComponent().inject(this);
         mText = itemView.findViewById(R.id.tv_text);
         tvAttachments = itemView.findViewById(R.id.tv_attachments);
 

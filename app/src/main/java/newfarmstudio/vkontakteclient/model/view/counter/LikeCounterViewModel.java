@@ -11,10 +11,10 @@ public class LikeCounterViewModel extends CounterViewModel {
     private Likes mLikes;
 
     public LikeCounterViewModel(Likes likes) {
-        super(likes.getCount());
+        super(likes != null ? likes.getCount() : 0);
         this.mLikes = likes;
 
-        if (mLikes.getUserLikes() == 1) {
+        if (mLikes != null && mLikes.getUserLikes() == 1) {
             setAccentColor();
         }
     }

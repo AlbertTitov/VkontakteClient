@@ -12,10 +12,10 @@ public class RepostCounterViewModel extends CounterViewModel {
 
 
     public RepostCounterViewModel(Reposts reposts) {
-        super(reposts.getCount());
+        super(reposts != null ? reposts.getCount() : 0);
         this.mReposts = reposts;
 
-        if (reposts.getUserReposted() == 1) {
+        if (mReposts != null && mReposts.getUserReposted() == 1) {
             setAccentColor();
         }
     }
