@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.model.view.NewsItemHeaderViewModel;
@@ -17,20 +19,22 @@ import newfarmstudio.vkontakteclient.model.view.NewsItemHeaderViewModel;
 
 public class NewsItemHeaderHolder extends BaseViewHolder<NewsItemHeaderViewModel> {
 
-    private CircleImageView civProfileImage;
-    private TextView tvName;
+    @BindView(R.id.civ_profile_image)
+    CircleImageView civProfileImage;
 
-    private ImageView isRepostedIcon;
-    private TextView tvRepostedProfileName;
+    @BindView(R.id.tv_profile_name)
+    TextView tvName;
+
+    @BindView(R.id.iv_reposted_icon)
+    ImageView isRepostedIcon;
+
+    @BindView(R.id.tv_reposted_profile_name)
+    TextView tvRepostedProfileName;
 
 
     public NewsItemHeaderHolder(View itemView) {
         super(itemView);
-
-        civProfileImage = itemView.findViewById(R.id.civ_profile_image);
-        tvName = itemView.findViewById(R.id.tv_profile_name);
-        isRepostedIcon = itemView.findViewById(R.id.iv_reposted_icon);
-        tvRepostedProfileName = itemView.findViewById(R.id.tv_reposted_profile_name);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override

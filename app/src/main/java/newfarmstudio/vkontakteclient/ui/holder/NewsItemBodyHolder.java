@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.model.view.NewsItemBodyViewModel;
@@ -16,17 +18,20 @@ import newfarmstudio.vkontakteclient.model.view.NewsItemBodyViewModel;
 
 public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
 
-    private TextView mText;
-    private TextView tvAttachments;
+    @BindView(R.id.tv_text)
+    TextView mText;
+
+    @BindView(R.id.tv_attachments)
+    TextView tvAttachments;
 
     @Inject
     protected Typeface mFontGoogle;
 
     public NewsItemBodyHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, itemView);
+
         MyApplication.getApplicationComponent().inject(this);
-        mText = itemView.findViewById(R.id.tv_text);
-        tvAttachments = itemView.findViewById(R.id.tv_attachments);
 
         if (tvAttachments != null) {
             tvAttachments.setTypeface(mFontGoogle);

@@ -10,6 +10,8 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.manager.MyFragmentManager;
@@ -21,7 +23,14 @@ import newfarmstudio.vkontakteclient.ui.fragment.BaseFragment;
 
 public abstract class BaseActivity extends MvpAppCompatActivity {
 
-    protected ProgressBar mProgressBar;
+    @BindView(R.id.progress)
+    ProgressBar mProgressBar;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.main_wrapper)
+    FrameLayout parent;
 
     @Inject
     MyFragmentManager myFragmentManager;
@@ -30,14 +39,12 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+        ButterKnife.bind(this);
 
         MyApplication.getApplicationComponent().inject(this);
 
-        mProgressBar = findViewById(R.id.progress);
-        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FrameLayout parent = findViewById(R.id.main_wrapper);
         getLayoutInflater().inflate(getMainContentLayout(), parent);
     }
 

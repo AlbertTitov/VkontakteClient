@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.BaseAdapter;
 import newfarmstudio.vkontakteclient.common.manager.MyLinearLayoutManager;
@@ -24,17 +26,20 @@ import newfarmstudio.vkontakteclient.mvp.view.BaseFeedView;
 
 public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedView{
 
+    @BindView(R.id.rv_list)
     RecyclerView mRecyclerView;
     BaseAdapter mBaseAdapter;
 
     protected BaseFeedPresenter mBaseFeedPresenter;
 
+    @BindView(R.id.swipe_refresh)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected ProgressBar mProgressBar;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
 
         setUpSwipeToRefreshLayout(view);
         setUpRecyclerView(view);
@@ -55,7 +60,6 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     }
 
     private void setUpRecyclerView(View rootView) {
-        mRecyclerView = rootView.findViewById(R.id.rv_list);
         MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity());
 
         mRecyclerView.setLayoutManager(myLinearLayoutManager);
@@ -77,7 +81,6 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     }
 
     private void setUpSwipeToRefreshLayout(View rootView) {
-        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(() -> onCreateFeedPresenter().loadRefresh());
         mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         mProgressBar = getBaseActivity().getProgressBar();

@@ -7,6 +7,8 @@ import newfarmstudio.vkontakteclient.common.manager.NetworkManager;
 import newfarmstudio.vkontakteclient.di.module.ApplicationModule;
 import newfarmstudio.vkontakteclient.di.module.ManagerModule;
 import newfarmstudio.vkontakteclient.di.module.RestModule;
+import newfarmstudio.vkontakteclient.mvp.presenter.MainPresenter;
+import newfarmstudio.vkontakteclient.mvp.presenter.MembersPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.NewsFeedPresenter;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.activity.MainActivity;
@@ -34,6 +36,8 @@ public interface ApplicationComponent {
 
     //presenters
     void inject(NewsFeedPresenter presenter);
+    void inject(MainPresenter presenter);
+    void inject(MembersPresenter presenter);
 
     //managers
     void inject(NetworkManager networkManager);
