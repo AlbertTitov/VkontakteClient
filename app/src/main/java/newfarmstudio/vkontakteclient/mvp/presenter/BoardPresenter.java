@@ -14,53 +14,55 @@ import io.realm.Sort;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.consts.ApiConstants;
 import newfarmstudio.vkontakteclient.model.Member;
+import newfarmstudio.vkontakteclient.model.Topic;
 import newfarmstudio.vkontakteclient.model.view.BaseViewModel;
-import newfarmstudio.vkontakteclient.model.view.MemberViewModel;
+import newfarmstudio.vkontakteclient.model.view.TopicViewModel;
 import newfarmstudio.vkontakteclient.mvp.view.BaseFeedView;
-import newfarmstudio.vkontakteclient.rest.api.GroupsApi;
-import newfarmstudio.vkontakteclient.rest.model.request.GroupsGetMembersRequestModel;
+import newfarmstudio.vkontakteclient.rest.api.BoardApi;
+import newfarmstudio.vkontakteclient.rest.model.request.BoardGetTopicsRequestModel;
 
 /**
  * Created by Альберт on 11.03.2018.
  */
 
 @InjectViewState
-public class MembersPresenter extends BaseFeedPresenter<BaseFeedView> {
+public class BoardPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     @Inject
-    GroupsApi groupsApi;
+    BoardApi mBoardApi;
 
-    public MembersPresenter() {
+    public BoardPresenter() {
         MyApplication.getApplicationComponent().inject(this);
     }
 
     @Override
     public Observable<BaseViewModel> onCreateLoadDataObservable(int count, int offset) {
-        return groupsApi.getMembers(new GroupsGetMembersRequestModel(
-                ApiConstants.MY_GROUP_ID, count, offset).toMap())
-                .flatMap(baseItemResponseFull -> {
-
-                    return Observable.fromIterable(baseItemResponseFull.response.getItems());
-                })
+        return mBoardApi.getTopics(new BoardGetTopicsRequestModel(
+                ApiConstants.MY_GROUP_ID, count, offset
+        ).toMap())
+                .flatMap(baseItemResponseFull ->
+                    Observable.fromIterable(baseItemResponseFull.response.getItems()))
+                .doOnNext(topic -> topic.setGroupId(ApiConstants.MY_GROUP_ID))
                 .doOnNext(this::saveToDb)
-                .map(MemberViewModel::new);
+                .map(TopicViewModel::new);
     }
 
     @Override
     public Observable<BaseViewModel> onCreateRestoreDataObservable() {
         return Observable.fromCallable(getListFromRealmCallable())
                 .flatMap(Observable::fromIterable)
-                .map(MemberViewModel::new);
+                .map(TopicViewModel::new);
     }
 
-    public Callable<List<Member>> getListFromRealmCallable() {
+    private Callable<List<Topic>> getListFromRealmCallable() {
         return () -> {
             String[] sortFields = {Member.ID};
-            Sort[] sortOrder = {Sort.ASCENDING};
-
+            Sort[] sortOrder = {Sort.DESCENDING};
             Realm realm = Realm.getDefaultInstance();
-            RealmResults<Member> results = realm.where(Member.class)
+            RealmResults<Topic> results = realm.where(Topic.class)
+                    .equalTo("groupId", ApiConstants.MY_GROUP_ID)
                     .sort(sortFields, sortOrder).findAll();
+
             return realm.copyFromRealm(results);
         };
     }

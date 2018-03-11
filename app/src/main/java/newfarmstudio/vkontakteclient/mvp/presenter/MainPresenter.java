@@ -21,6 +21,7 @@ import newfarmstudio.vkontakteclient.mvp.view.MainView;
 import newfarmstudio.vkontakteclient.rest.api.UsersApi;
 import newfarmstudio.vkontakteclient.rest.model.request.UsersGetRequestModel;
 import newfarmstudio.vkontakteclient.ui.fragment.BaseFragment;
+import newfarmstudio.vkontakteclient.ui.fragment.BoardFragment;
 import newfarmstudio.vkontakteclient.ui.fragment.MembersFragment;
 import newfarmstudio.vkontakteclient.ui.fragment.MyPostsFragment;
 import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
@@ -111,6 +112,9 @@ public class MainPresenter extends MvpPresenter<MainView> {
                 break;
             case 4:
                 fragment = new MembersFragment();
+                break;
+            case 5:
+                fragment = new BoardFragment();
                 break;
         }
 

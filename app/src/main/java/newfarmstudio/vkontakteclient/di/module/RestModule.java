@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import newfarmstudio.vkontakteclient.rest.RestClient;
+import newfarmstudio.vkontakteclient.rest.api.BoardApi;
 import newfarmstudio.vkontakteclient.rest.api.GroupsApi;
 import newfarmstudio.vkontakteclient.rest.api.UsersApi;
 import newfarmstudio.vkontakteclient.rest.api.WallApi;
@@ -41,4 +42,8 @@ public class RestModule {
     @Singleton
     @Provides
     public GroupsApi provideGroupsApi() {return mRestClient.createService(GroupsApi.class);}
+
+    @Singleton
+    @Provides
+    public BoardApi provideBoardApi() {return mRestClient.createService(BoardApi.class);}
 }
