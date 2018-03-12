@@ -1,5 +1,7 @@
 package newfarmstudio.vkontakteclient.mvp.presenter;
 
+import android.util.Log;
+
 import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.List;
@@ -113,6 +115,7 @@ public abstract class BaseFeedPresenter<V extends BaseFeedView> extends MvpPrese
 
     public void onLoadingFailed(Throwable throwable) {
         getViewState().showError(throwable.getMessage());
+        Log.i("ogss", "ret");
     }
 
     public void onLoadingSuccess(ProgressType progressType, List<BaseViewModel> items) {

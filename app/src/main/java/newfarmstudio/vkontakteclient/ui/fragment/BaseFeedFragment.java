@@ -31,10 +31,17 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     BaseAdapter mBaseAdapter;
 
     protected BaseFeedPresenter mBaseFeedPresenter;
+    private boolean isWithEndlessList;
 
     @BindView(R.id.swipe_refresh)
     protected SwipeRefreshLayout mSwipeRefreshLayout;
     protected ProgressBar mProgressBar;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        isWithEndlessList = true;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -63,14 +70,16 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
         MyLinearLayoutManager myLinearLayoutManager = new MyLinearLayoutManager(getActivity());
 
         mRecyclerView.setLayoutManager(myLinearLayoutManager);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (myLinearLayoutManager.isOnNextPagePosition()) {
-                    mBaseFeedPresenter.loadNext(mBaseAdapter.getRealItemCount());
+        if (isWithEndlessList) {
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (myLinearLayoutManager.isOnNextPagePosition()) {
+                        mBaseFeedPresenter.loadNext(mBaseAdapter.getRealItemCount());
+                    }
                 }
-            }
-        });
+            });
+        }
 
         ((SimpleItemAnimator) mRecyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
     }
@@ -122,4 +131,8 @@ public abstract class BaseFeedFragment extends BaseFragment implements BaseFeedV
     }
 
     protected abstract BaseFeedPresenter onCreateFeedPresenter();
+
+    public void setWithEndlessList(boolean withEndlessList) {
+        isWithEndlessList = withEndlessList;
+    }
 }
