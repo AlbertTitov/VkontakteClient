@@ -10,6 +10,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.utils.UIHelper;
+import newfarmstudio.vkontakteclient.model.CommentItem;
 import newfarmstudio.vkontakteclient.model.WallItem;
 import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
 
@@ -31,6 +32,13 @@ public class OpenedPostHeaderViewModel extends BaseViewModel {
         this.mProfileName = wallItem.getSenderName();
         this.mProfilePhoto = wallItem.getSenderPhoto();
         this.mText = wallItem.getText();
+    }
+
+    public OpenedPostHeaderViewModel(CommentItem commentItem) {
+        this.mId = commentItem.getId();
+        this.mProfileName = commentItem.getSenderName();
+        this.mProfilePhoto = commentItem.getSenderPhoto();
+        this.mText = commentItem.getDisplayText();
     }
 
     @Override

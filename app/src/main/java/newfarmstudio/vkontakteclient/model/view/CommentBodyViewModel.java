@@ -13,6 +13,8 @@ import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.manager.MyFragmentManager;
 import newfarmstudio.vkontakteclient.common.utils.UIHelper;
 import newfarmstudio.vkontakteclient.model.CommentItem;
+import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
+import newfarmstudio.vkontakteclient.ui.fragment.OpenedCommentFragment;
 import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
 
 /**
@@ -81,6 +83,14 @@ public class CommentBodyViewModel extends BaseViewModel {
 
         @Override
         public void bindViewHolder(CommentBodyViewModel commentBodyViewModel) {
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mFragmentManager.addFragment((BaseActivity) itemView.getContext(),
+                            OpenedCommentFragment.newInstance(commentBodyViewModel.getId()), R.id.main_wrapper);
+                }
+            });
 
             UIHelper.getInstance().setUpTextViewWithMessage(tvText, commentBodyViewModel.getText(), "");
             UIHelper.getInstance().setUpTextViewWithVisibility(tvAttachments, commentBodyViewModel.getAttachmentsString());
