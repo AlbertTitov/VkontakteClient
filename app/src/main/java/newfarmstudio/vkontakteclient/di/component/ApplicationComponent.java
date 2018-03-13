@@ -7,7 +7,10 @@ import newfarmstudio.vkontakteclient.common.manager.NetworkManager;
 import newfarmstudio.vkontakteclient.di.module.ApplicationModule;
 import newfarmstudio.vkontakteclient.di.module.ManagerModule;
 import newfarmstudio.vkontakteclient.di.module.RestModule;
+import newfarmstudio.vkontakteclient.model.view.CommentBodyViewModel;
+import newfarmstudio.vkontakteclient.model.view.CommentFooterViewModel;
 import newfarmstudio.vkontakteclient.mvp.presenter.BoardPresenter;
+import newfarmstudio.vkontakteclient.mvp.presenter.CommentsPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.InfoPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.MainPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.MembersPresenter;
@@ -15,6 +18,7 @@ import newfarmstudio.vkontakteclient.mvp.presenter.NewsFeedPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.OpenedPostPresenter;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.activity.MainActivity;
+import newfarmstudio.vkontakteclient.ui.fragment.CommentsFragment;
 import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
 import newfarmstudio.vkontakteclient.ui.fragment.OpenedPostFragment;
 import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemBodyHolder;
@@ -36,12 +40,15 @@ public interface ApplicationComponent {
     //fragments
     void inject(NewsFeedFragment newsFeedFragment);
     void inject(OpenedPostFragment openedPostFragment);
+    void inject(CommentsFragment openedPostFragment);
 
     //holders
     void inject(NewsItemBodyHolder holder);
     void inject(NewsItemFooterHolder holder);
     void inject(ImageAttachmentHolder holder);
     void inject(VideoAttachmentHolder holder);
+    void inject(CommentBodyViewModel.CommentBodyViewHolder holder);
+    void inject(CommentFooterViewModel.CommentFooterHolder holder);
 
     //presenters
     void inject(NewsFeedPresenter presenter);
@@ -50,6 +57,7 @@ public interface ApplicationComponent {
     void inject(BoardPresenter presenter);
     void inject(InfoPresenter presenter);
     void inject(OpenedPostPresenter presenter);
+    void inject(CommentsPresenter presenter);
 
     //managers
     void inject(NetworkManager networkManager);

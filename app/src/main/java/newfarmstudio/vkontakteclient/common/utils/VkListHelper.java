@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import newfarmstudio.vkontakteclient.model.CommentItem;
 import newfarmstudio.vkontakteclient.model.Owner;
 import newfarmstudio.vkontakteclient.model.WallItem;
 import newfarmstudio.vkontakteclient.model.attachment.ApiAttachment;
@@ -93,5 +94,23 @@ public class VkListHelper {
             }
         }
         return attachmentVkItems;
+    }
+
+    public static List<CommentItem> getCommentsList(ItemWithSendersResponse<CommentItem> response) {
+        return getCommentsList(response, false);
+    }
+
+    public static List<CommentItem> getCommentsList(ItemWithSendersResponse<CommentItem> response, boolean isFromTopic) {
+        List<CommentItem> commentItems = response.getItems();
+
+        for (CommentItem commentItem : commentItems) {
+            Owner sender = response.getSender(commentItem.getFromId());
+            commentItem.setSenderName(sender.getFullName());
+            commentItem.setSenderPhoto(sender.getPhoto());
+
+            commentItem.setIsFromTopic(isFromTopic);
+            commentItem.setAttachmentsString(Utils.convertAttachmentsToFontIcons(commentItem.getAttachments()));
+        }
+        return commentItems;
     }
 }

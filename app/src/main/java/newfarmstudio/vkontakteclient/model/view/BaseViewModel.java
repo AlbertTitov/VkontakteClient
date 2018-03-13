@@ -43,7 +43,11 @@ public abstract class BaseViewModel {
         AttachmentPage(R.layout.item_attachment_page),
 
         OpenedPostHeader(R.layout.item_opened_post_header),
-        OpenedPostRepostHeader(R.layout.item_opened_post_repost_header);
+        OpenedPostRepostHeader(R.layout.item_opened_post_repost_header),
+
+        CommentHeader(R.layout.item_comment_header),
+        CommentBody(R.layout.item_comment_body),
+        CommentFooter(R.layout.item_comment_footer);
 
         private final int id;
 

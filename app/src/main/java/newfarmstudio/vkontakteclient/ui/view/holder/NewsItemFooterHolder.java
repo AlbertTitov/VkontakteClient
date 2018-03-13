@@ -12,11 +12,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
+import newfarmstudio.vkontakteclient.common.manager.MyFragmentManager;
 import newfarmstudio.vkontakteclient.common.utils.Utils;
+import newfarmstudio.vkontakteclient.model.Place;
 import newfarmstudio.vkontakteclient.model.view.NewsItemFooterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.CommentCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.LikeCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.RepostCounterViewModel;
+import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
+import newfarmstudio.vkontakteclient.ui.fragment.CommentsFragment;
 
 /**
  * Created by Альберт on 09.03.2018.
@@ -45,11 +49,17 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
     @BindView(R.id.tv_reposts_icon)
     TextView tvRepostsIcon;
 
+    @BindView(R.id.rl_comments)
+    View rlComments;
+
     private Resources mResources;
     private Context mContext;
 
     @Inject
     Typeface mGoogleFontTypeface;
+
+    @Inject
+    MyFragmentManager mFragmentManager;
 
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
@@ -71,6 +81,17 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
         bindLikes(item.getLikes());
         bindComments(item.getComments());
         bindReposts(item.getReposts());
+
+        rlComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragmentManager.addFragment((BaseActivity) view.getContext(),
+                        CommentsFragment.newInstance(new Place(String.valueOf(item.getOwnerId()), String.valueOf(item.getId()))),
+                        R.id.main_wrapper);
+            }
+        });
+
+
     }
 
     @Override
