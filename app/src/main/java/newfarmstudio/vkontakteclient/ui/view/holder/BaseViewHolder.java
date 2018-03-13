@@ -1,4 +1,4 @@
-package newfarmstudio.vkontakteclient.ui.holder;
+package newfarmstudio.vkontakteclient.ui.view.holder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

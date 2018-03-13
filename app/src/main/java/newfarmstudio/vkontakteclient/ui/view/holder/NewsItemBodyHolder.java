@@ -1,4 +1,4 @@
-package newfarmstudio.vkontakteclient.ui.holder;
+package newfarmstudio.vkontakteclient.ui.view.holder;
 
 import android.graphics.Typeface;
 import android.view.View;
@@ -10,7 +10,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
+import newfarmstudio.vkontakteclient.common.manager.MyFragmentManager;
+import newfarmstudio.vkontakteclient.common.utils.UIHelper;
 import newfarmstudio.vkontakteclient.model.view.NewsItemBodyViewModel;
+import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
+import newfarmstudio.vkontakteclient.ui.fragment.OpenedPostFragment;
 
 /**
  * Created by Альберт on 07.03.2018.
@@ -27,6 +31,9 @@ public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
     @Inject
     protected Typeface mFontGoogle;
 
+    @Inject
+    MyFragmentManager mFragmentManager;
+
     public NewsItemBodyHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
@@ -39,14 +46,24 @@ public class NewsItemBodyHolder extends BaseViewHolder<NewsItemBodyViewModel> {
     }
 
     @Override
-    public void bindViewHolder(NewsItemBodyViewModel newsFeedItemBody) {
-        mText.setText(newsFeedItemBody.getText());
-        tvAttachments.setText(newsFeedItemBody.getmAttachmentString());
+    public void bindViewHolder(NewsItemBodyViewModel item) {
+        mText.setText(item.getText());
+        tvAttachments.setText(item.getAttachmentString());
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mFragmentManager.addFragment((BaseActivity) v.getContext(), OpenedPostFragment.newInstance(item.getId()), R.id.main_wrapper);
+            }
+        });
+
+        UIHelper.getInstance().setUpTextViewWithVisibility(mText, item.getText());
+        UIHelper.getInstance().setUpTextViewWithVisibility(tvAttachments, item.getAttachmentString());
     }
 
     @Override
     public void unbindViewHolder() {
         mText.setText(null);
         tvAttachments.setText(null);
+        itemView.setOnClickListener(null);
     }
 }

@@ -6,8 +6,8 @@ import newfarmstudio.vkontakteclient.model.WallItem;
 import newfarmstudio.vkontakteclient.model.view.counter.CommentCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.LikeCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.RepostCounterViewModel;
-import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
-import newfarmstudio.vkontakteclient.ui.holder.NewsItemFooterHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemFooterHolder;
 
 /**
  * Created by Альберт on 09.03.2018.

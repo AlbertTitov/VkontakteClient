@@ -16,6 +16,7 @@ import io.realm.Sort;
 import newfarmstudio.vkontakteclient.CurrentUser;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.common.utils.VkListHelper;
+import newfarmstudio.vkontakteclient.consts.ApiConstants;
 import newfarmstudio.vkontakteclient.model.WallItem;
 import newfarmstudio.vkontakteclient.model.view.BaseViewModel;
 import newfarmstudio.vkontakteclient.model.view.NewsItemBodyViewModel;
@@ -32,7 +33,6 @@ import newfarmstudio.vkontakteclient.rest.model.request.WallGetRequestModel;
 @InjectViewState
 public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
-    public static final int NEWS_FEED_OWNER_ID = -86529522;
     private static int ownerId;
 
     @Inject
@@ -42,7 +42,7 @@ public class NewsFeedPresenter extends BaseFeedPresenter<BaseFeedView> {
 
     public NewsFeedPresenter() {
         MyApplication.getApplicationComponent().inject(this);
-        setOwnerId(NEWS_FEED_OWNER_ID);
+        setOwnerId(ApiConstants.MY_GROUP_ID);
     }
 
     @Override

@@ -8,6 +8,9 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import newfarmstudio.vkontakteclient.model.attachment.ApiAttachment;
+import newfarmstudio.vkontakteclient.model.countable.Comments;
+import newfarmstudio.vkontakteclient.model.countable.Likes;
+import newfarmstudio.vkontakteclient.model.countable.Reposts;
 
 public class WallItem extends RealmObject {
 

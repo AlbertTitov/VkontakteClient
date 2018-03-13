@@ -1,9 +1,8 @@
-package newfarmstudio.vkontakteclient.ui.holder;
+package newfarmstudio.vkontakteclient.ui.view.holder;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -55,7 +54,6 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        Log.i("logsss", "footer created");
 
         MyApplication.getApplicationComponent().inject(this);
         mContext = itemView.getContext();

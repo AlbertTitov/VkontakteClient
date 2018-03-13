@@ -1,10 +1,11 @@
-package newfarmstudio.vkontakteclient.model.attachment;
+package newfarmstudio.vkontakteclient.model.attachment.doc;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.vk.sdk.api.model.VKAttachments;
 
 import io.realm.RealmObject;
+import newfarmstudio.vkontakteclient.model.attachment.Attachment;
 
 
 public class Doc extends RealmObject implements Attachment {
@@ -35,6 +36,10 @@ public class Doc extends RealmObject implements Attachment {
     @SerializedName("access_key")
     @Expose
     private String accessKey;
+
+    @SerializedName("preview")
+    @Expose
+    private Preview preview;
 
     public int getId() {
         return id;
@@ -111,5 +116,9 @@ public class Doc extends RealmObject implements Attachment {
 
     public void setAccessKey(String accessKey) {
         this.accessKey = accessKey;
+    }
+
+    public Preview getPreview() {
+        return preview;
     }
 }

@@ -8,6 +8,7 @@ import newfarmstudio.vkontakteclient.rest.RestClient;
 import newfarmstudio.vkontakteclient.rest.api.BoardApi;
 import newfarmstudio.vkontakteclient.rest.api.GroupsApi;
 import newfarmstudio.vkontakteclient.rest.api.UsersApi;
+import newfarmstudio.vkontakteclient.rest.api.VideoApi;
 import newfarmstudio.vkontakteclient.rest.api.WallApi;
 
 /**
@@ -46,4 +47,8 @@ public class RestModule {
     @Singleton
     @Provides
     public BoardApi provideBoardApi() {return mRestClient.createService(BoardApi.class);}
+
+    @Singleton
+    @Provides
+    public VideoApi provideVideoApi() {return mRestClient.createService(VideoApi.class);}
 }

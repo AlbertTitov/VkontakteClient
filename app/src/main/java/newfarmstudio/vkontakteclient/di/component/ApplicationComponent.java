@@ -12,11 +12,15 @@ import newfarmstudio.vkontakteclient.mvp.presenter.InfoPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.MainPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.MembersPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.NewsFeedPresenter;
+import newfarmstudio.vkontakteclient.mvp.presenter.OpenedPostPresenter;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.activity.MainActivity;
 import newfarmstudio.vkontakteclient.ui.fragment.NewsFeedFragment;
-import newfarmstudio.vkontakteclient.ui.holder.NewsItemBodyHolder;
-import newfarmstudio.vkontakteclient.ui.holder.NewsItemFooterHolder;
+import newfarmstudio.vkontakteclient.ui.fragment.OpenedPostFragment;
+import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemBodyHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemFooterHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.attachment.ImageAttachmentHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.attachment.VideoAttachmentHolder;
 
 /**
  * Created by Альберт on 06.03.2018.
@@ -31,10 +35,13 @@ public interface ApplicationComponent {
 
     //fragments
     void inject(NewsFeedFragment newsFeedFragment);
+    void inject(OpenedPostFragment openedPostFragment);
 
     //holders
     void inject(NewsItemBodyHolder holder);
     void inject(NewsItemFooterHolder holder);
+    void inject(ImageAttachmentHolder holder);
+    void inject(VideoAttachmentHolder holder);
 
     //presenters
     void inject(NewsFeedPresenter presenter);
@@ -42,6 +49,7 @@ public interface ApplicationComponent {
     void inject(MembersPresenter presenter);
     void inject(BoardPresenter presenter);
     void inject(InfoPresenter presenter);
+    void inject(OpenedPostPresenter presenter);
 
     //managers
     void inject(NetworkManager networkManager);

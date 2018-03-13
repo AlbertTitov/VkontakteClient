@@ -11,7 +11,7 @@ import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.model.Member;
-import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
 
 /**
  * Created by Альберт on 11.03.2018.

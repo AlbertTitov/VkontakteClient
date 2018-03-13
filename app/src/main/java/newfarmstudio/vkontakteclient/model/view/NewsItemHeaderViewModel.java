@@ -3,8 +3,8 @@ package newfarmstudio.vkontakteclient.model.view;
 import android.view.View;
 
 import newfarmstudio.vkontakteclient.model.WallItem;
-import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
-import newfarmstudio.vkontakteclient.ui.holder.NewsItemHeaderHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemHeaderHolder;
 
 /**
  * Created by Альберт on 07.03.2018.

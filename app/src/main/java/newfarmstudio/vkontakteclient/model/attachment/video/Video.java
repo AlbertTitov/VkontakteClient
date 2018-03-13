@@ -1,14 +1,15 @@
-package newfarmstudio.vkontakteclient.model.attachment;
+package newfarmstudio.vkontakteclient.model.attachment.video;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.vk.sdk.api.model.VKAttachments;
-
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+import newfarmstudio.vkontakteclient.model.attachment.Attachment;
 
 
 public class Video extends RealmObject implements Attachment {
-
+    @PrimaryKey
     @SerializedName("id")
     @Expose
     private int id;
@@ -51,6 +52,9 @@ public class Video extends RealmObject implements Attachment {
     @SerializedName("can_add")
     @Expose
     private int canAdd;
+    @SerializedName("files")
+    @Expose
+    public File files;
 
 
     public int getId() {
@@ -170,4 +174,7 @@ public class Video extends RealmObject implements Attachment {
         return VKAttachments.TYPE_VIDEO;
     }
 
+    public File getFiles() {
+        return files;
+    }
 }

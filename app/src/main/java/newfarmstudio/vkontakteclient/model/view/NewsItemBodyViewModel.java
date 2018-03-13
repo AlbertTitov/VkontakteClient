@@ -3,8 +3,7 @@ package newfarmstudio.vkontakteclient.model.view;
 import android.view.View;
 
 import newfarmstudio.vkontakteclient.model.WallItem;
-import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
-import newfarmstudio.vkontakteclient.ui.holder.NewsItemBodyHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.NewsItemBodyHolder;
 
 /**
  * Created by Альберт on 07.03.2018.
@@ -37,7 +36,7 @@ public class NewsItemBodyViewModel extends BaseViewModel {
     }
 
     @Override
-    protected BaseViewHolder onCreateViewHolder(View view) {
+    public NewsItemBodyHolder onCreateViewHolder(View view) {
         return new NewsItemBodyHolder(view);
     }
 
@@ -49,7 +48,7 @@ public class NewsItemBodyViewModel extends BaseViewModel {
         return mText;
     }
 
-    public String getmAttachmentString() {
+    public String getAttachmentString() {
         return mAttachmentString;
     }
 

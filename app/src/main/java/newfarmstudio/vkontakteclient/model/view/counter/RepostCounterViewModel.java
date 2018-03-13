@@ -1,6 +1,6 @@
 package newfarmstudio.vkontakteclient.model.view.counter;
 
-import newfarmstudio.vkontakteclient.model.Reposts;
+import newfarmstudio.vkontakteclient.model.countable.Reposts;
 
 /**
  * Created by Альберт on 09.03.2018.

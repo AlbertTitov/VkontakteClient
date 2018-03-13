@@ -6,7 +6,7 @@ import android.widget.RelativeLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import newfarmstudio.vkontakteclient.R;
-import newfarmstudio.vkontakteclient.ui.holder.BaseViewHolder;
+import newfarmstudio.vkontakteclient.ui.view.holder.BaseViewHolder;
 
 /**
  * Created by Альберт on 12.03.2018.

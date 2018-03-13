@@ -1,6 +1,6 @@
 package newfarmstudio.vkontakteclient.model.view.counter;
 
-import newfarmstudio.vkontakteclient.model.Comments;
+import newfarmstudio.vkontakteclient.model.countable.Comments;
 
 /**
  * Created by Альберт on 09.03.2018.

@@ -1,5 +1,5 @@
 
-package newfarmstudio.vkontakteclient.model;
+package newfarmstudio.vkontakteclient.model.countable;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,6 @@
 package newfarmstudio.vkontakteclient.model.view.counter;
 
-import newfarmstudio.vkontakteclient.model.Likes;
+import newfarmstudio.vkontakteclient.model.countable.Likes;
 
 /**
  * Created by Альберт on 09.03.2018.
