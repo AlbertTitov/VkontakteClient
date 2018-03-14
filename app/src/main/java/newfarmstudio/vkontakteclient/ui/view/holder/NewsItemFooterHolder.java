@@ -10,15 +10,26 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import io.realm.Realm;
+import io.realm.RealmObject;
 import newfarmstudio.vkontakteclient.MyApplication;
 import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.common.manager.MyFragmentManager;
 import newfarmstudio.vkontakteclient.common.utils.Utils;
+import newfarmstudio.vkontakteclient.common.utils.VkListHelper;
 import newfarmstudio.vkontakteclient.model.Place;
+import newfarmstudio.vkontakteclient.model.WallItem;
+import newfarmstudio.vkontakteclient.model.countable.Likes;
 import newfarmstudio.vkontakteclient.model.view.NewsItemFooterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.CommentCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.LikeCounterViewModel;
 import newfarmstudio.vkontakteclient.model.view.counter.RepostCounterViewModel;
+import newfarmstudio.vkontakteclient.rest.api.LikeEventOnSubscribe;
+import newfarmstudio.vkontakteclient.rest.api.WallApi;
+import newfarmstudio.vkontakteclient.rest.model.request.WallGetByIdRequestModel;
 import newfarmstudio.vkontakteclient.ui.activity.BaseActivity;
 import newfarmstudio.vkontakteclient.ui.fragment.CommentsFragment;
 
@@ -49,9 +60,13 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
     @BindView(R.id.tv_reposts_icon)
     TextView tvRepostsIcon;
 
+    @BindView(R.id.rl_likes)
+    View rlLikes;
+
     @BindView(R.id.rl_comments)
     View rlComments;
 
+    private static final String POST = "post";
     private Resources mResources;
     private Context mContext;
 
@@ -60,6 +75,9 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
 
     @Inject
     MyFragmentManager mFragmentManager;
+
+    @Inject
+    WallApi mWallApi;
 
     public NewsItemFooterHolder(View itemView) {
         super(itemView);
@@ -91,7 +109,12 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
             }
         });
 
-
+        rlLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                like(item);
+            }
+        });
     }
 
     @Override
@@ -119,5 +142,46 @@ public class NewsItemFooterHolder extends BaseViewHolder<NewsItemFooterViewModel
         tvRepostsCount.setText(String.valueOf(reposts.getCount()));
         tvRepostsCount.setTextColor(mResources.getColor(reposts.getTextColor()));
         tvRepostsIcon.setTextColor(mResources.getColor(reposts.getIconColor()));
+    }
+
+    public WallItem getWallItemFromRealm(int postId) {
+        Realm realm = Realm.getDefaultInstance();
+        WallItem wallItem = realm.where(WallItem.class)
+                .equalTo("id", postId)
+                .findFirst();
+        return realm.copyFromRealm(wallItem);
+    }
+
+    public void saveToDb(RealmObject item) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.executeTransaction(realm1 -> {
+            realm1.copyToRealmOrUpdate(item);
+        });
+    }
+
+    public Observable<LikeCounterViewModel> likeObservable(int ownerId, int postId, Likes likes) {
+        return Observable.create(new LikeEventOnSubscribe(POST, ownerId, postId, likes))
+                .observeOn(Schedulers.io())
+                .flatMap(count -> {
+
+                    return mWallApi.getById(new WallGetByIdRequestModel(ownerId, postId).toMap());
+                })
+                .flatMap(full -> Observable.fromIterable(VkListHelper.getWallList(full.response)))
+                .doOnNext(this::saveToDb)
+                .map(wallItem -> new LikeCounterViewModel(wallItem.getLikes()));
+    }
+
+    public void like(NewsItemFooterViewModel item) {
+        WallItem wallItem = getWallItemFromRealm(item.getId());
+        likeObservable(wallItem.getOwnerId(), wallItem.getId(), wallItem.getLikes())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(likes -> {
+                    item.setLikes(likes);
+                    bindLikes(likes);
+                }, error -> {
+                    error.printStackTrace();
+                });
+
     }
 }
