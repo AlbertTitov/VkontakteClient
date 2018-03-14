@@ -68,4 +68,6 @@ dependencies {
         transitive = true
     }
     implementation 'com.mikepenz:google-material-typeface:2.2.0.2.original@aar'
+    //DroidNinja
+    implementation 'com.droidninja:filepicker:2.1.3'
 }

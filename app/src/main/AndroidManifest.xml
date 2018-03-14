@@ -23,6 +23,10 @@
         </activity>
 
         <activity
+            android:name="newfarmstudio.vkontakteclient.ui.activity.CreatePostActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <activity
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
             android:theme="@style/VK.Transparent" />

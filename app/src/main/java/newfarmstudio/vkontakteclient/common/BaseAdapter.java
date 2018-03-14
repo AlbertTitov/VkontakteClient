@@ -90,4 +90,11 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseViewMod
         }
         return count;
     }
+
+    public void insertItem(BaseViewModel newItem) {
+        registerTypeInstance(newItem);
+
+        list.add(newItem);
+        notifyItemInserted(getItemCount() - 1);
+    }
 }

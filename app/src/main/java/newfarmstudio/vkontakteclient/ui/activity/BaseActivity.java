@@ -2,6 +2,8 @@ package newfarmstudio.vkontakteclient.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -32,6 +34,12 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     @BindView(R.id.main_wrapper)
     FrameLayout parent;
 
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordinatorLayout;
+
+    @BindView(R.id.fab)
+    public FloatingActionButton mFab;
+
     @Inject
     MyFragmentManager myFragmentManager;
 
@@ -50,6 +58,7 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
 
     public void fragmentOnScreen(BaseFragment fragment) {
         setToolbarTitle(fragment.createToolbarTitle(this));
+        setupFabVisibility(fragment.needFab());
     }
 
     public void setToolbarTitle(String title) {
@@ -84,5 +93,15 @@ public abstract class BaseActivity extends MvpAppCompatActivity {
     @Override
     public void onBackPressed() {
         removeCurrentFragment();
+    }
+
+    public void setupFabVisibility(boolean needFab) {
+        if (mFab == null) return;
+
+        if (needFab) {
+            mFab.show();
+        } else {
+            mFab.hide();
+        }
     }
 }

@@ -1,9 +1,11 @@
 package newfarmstudio.vkontakteclient.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 
@@ -14,6 +16,7 @@ import newfarmstudio.vkontakteclient.R;
 import newfarmstudio.vkontakteclient.mvp.presenter.BaseFeedPresenter;
 import newfarmstudio.vkontakteclient.mvp.presenter.NewsFeedPresenter;
 import newfarmstudio.vkontakteclient.rest.api.WallApi;
+import newfarmstudio.vkontakteclient.ui.activity.CreatePostActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,6 +53,24 @@ public class NewsFeedFragment extends BaseFeedFragment {
     @Override
     protected BaseFeedPresenter onCreateFeedPresenter() {
         return mPresenter;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBaseActivity().mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), CreatePostActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+    }
+
+    @Override
+    public boolean needFab() {
+        return true;
     }
 }
 
